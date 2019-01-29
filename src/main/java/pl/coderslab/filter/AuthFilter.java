@@ -1,4 +1,4 @@
-package pl.coderslab.filters;
+package pl.coderslab.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"*"})
 public class AuthFilter implements Filter {
+
     public void destroy() {
     }
 

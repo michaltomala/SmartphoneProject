@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
         input, select{
@@ -21,7 +21,7 @@
                modelAttribute="user"
                cssClass="container col-2" >
         <%--<form:errors path="*"  />--%>
-
+        <form:hidden path="id" />
 
         <form:input path="login" placeholder="login" cssClass="form-input"/>
         <form:errors path="login" cssClass="alert alert-danger" element="div" />
@@ -29,9 +29,16 @@
         <form:password path="password" placeholder="password" cssClass="form-input"/>
         <form:errors path="password" cssClass="alert alert-danger" element="div" />
 
-        <c:if test="${errDB}">
-            <div css="alert alert-danger">${errDB}</div>
+        <%--Zrobić powtórzenie hasła--%>
+        <form:password path="repeatedPassword" placeholder="repeat password" cssClass="form-input"/>
+        <form:errors path="repeatedPassword" cssClass="alert alert-danger" element="div" />
+        <c:if test="${pwdErr}">
+            <div css="alert alert-danger">${pwdErr}</div>
         </c:if>
+
+        <form:input path="email" placeholder="email" cssClass="form-input"/>
+        <form:errors path="email" cssClass="alert alert-danger" element="div" />
+
 
         <input type="submit"  class="btn btn-success">
     </form:form>

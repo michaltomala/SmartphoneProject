@@ -1,12 +1,12 @@
 package pl.coderslab.entity;
 
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.validator.FullValidationUserGroup;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.groups.Default;
 
 @Entity
 public class User {
@@ -15,13 +15,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = {Default.class, FullValidationUserGroup.class})
+    @Column(unique = true)
     private String login;
 
-    @NotBlank
+    @NotBlank(groups = {Default.class, FullValidationUserGroup.class})
     private String password;
 
-    @NotBlank
+    @Transient
+    private String repeatedPassword;
+
+    @NotBlank(groups = FullValidationUserGroup.class)
+    @Email(groups = FullValidationUserGroup.class)
+    @Column(unique = true)
     private String email;
 
     private boolean isAdmin = false;
@@ -76,4 +82,13 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
+    public String getRepeatedPassword() {
+        return repeatedPassword;
+    }
+
+    public void setRepeatedPassword(String repeatedPassword) {
+        this.repeatedPassword = repeatedPassword;
+    }
+
 }

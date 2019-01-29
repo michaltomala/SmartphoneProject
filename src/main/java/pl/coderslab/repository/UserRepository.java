@@ -6,4 +6,5 @@ import pl.coderslab.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findFirstByLogin(String login);
+    User findFirstByEmail(String email);
 }

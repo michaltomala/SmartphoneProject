@@ -12,7 +12,7 @@ public class HomeController {
     public String redirectHome(){
         return "redirect:/home";
     }
-
+//todo zrobić widoku ukryty link dla zalogowanego użytkownika i dwa ukryte linki dla zalogowanego admina
     @GetMapping("/home")
     @ResponseBody
     public String home(){

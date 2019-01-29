@@ -7,6 +7,8 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.coderslab.converter.BrandConverter;
+import pl.coderslab.converter.PhoneConverter;
 import pl.coderslab.converter.UserConverter;
 //import pl.coderslab.converter.*;
 //import pl.coderslab.converter.UserConverter;
@@ -23,11 +25,19 @@ public class FormatterConfig implements WebMvcConfigurer{
     public void addFormatters(FormatterRegistry registry) {
 
         registry.addConverter(getUserConverter());
+        registry.addConverter(getPhoneConverter());
+        registry.addConverter(getBrandConverter ());
 
     }
 
     @Bean
     public UserConverter getUserConverter(){ return new UserConverter(); }
+
+    @Bean
+    public PhoneConverter getPhoneConverter(){ return new PhoneConverter(); }
+
+    @Bean
+    public BrandConverter getBrandConverter (){ return new BrandConverter(); }
 
 
 }

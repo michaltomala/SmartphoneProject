@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import pl.coderslab.validator.FullValidationUserGroup;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 
 @Entity
@@ -20,6 +21,7 @@ public class User {
     private String login;
 
     @NotBlank(groups = {Default.class, FullValidationUserGroup.class})
+    @Size(min = 6, groups = {Default.class, FullValidationUserGroup.class})
     private String password;
 
     @Transient

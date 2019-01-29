@@ -32,8 +32,8 @@
         <%--Zrobić powtórzenie hasła--%>
         <form:password path="repeatedPassword" placeholder="repeat password" cssClass="form-input"/>
         <form:errors path="repeatedPassword" cssClass="alert alert-danger" element="div" />
-        <c:if test="${pwdErr}">
-            <div css="alert alert-danger">${pwdErr}</div>
+        <c:if test="${not empty pwdErr}">
+            <div class="alert alert-danger">${pwdErr}</div>
         </c:if>
 
         <form:input path="email" placeholder="email" cssClass="form-input"/>

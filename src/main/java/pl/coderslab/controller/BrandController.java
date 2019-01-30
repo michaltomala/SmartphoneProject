@@ -2,6 +2,7 @@ package pl.coderslab.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Brand;
+import pl.coderslab.entity.Phone;
 import pl.coderslab.repository.BrandRepository;
+import pl.coderslab.repository.PhoneRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -21,6 +24,9 @@ public class BrandController {
 
     @Autowired
     private BrandRepository brandRepository;
+
+    @Autowired
+    private PhoneRepository phoneRepository;
 
     /**
      * CREATErud
@@ -79,4 +85,28 @@ public class BrandController {
         return "brand/list";
     }
 
+    /**
+     *  findALL phones by Brand
+     */
+
+//    todo porobić linki cofające
+
+    @GetMapping("/brand/list/{id}")
+    public String showAllSmartphonesById(Model model , @PathVariable Long id){
+        Brand brand = brandRepository.findOne(id);
+        model.addAttribute("brand",brand);
+        model.addAttribute("phones",phoneRepository.findAllByBrand(brand));
+        return "brand/single";
+    }
+
+//    todo do zrobienia jedna metoda do dodawania telefonu konkretnej marki
+    @GetMapping("/brand/addphone/{id}")
+    public String addPhoneByBrand(Model model , @PathVariable Long id , HttpServletRequest request){
+        Brand brand = brandRepository.findOne(id);
+        Phone phone = new Phone();
+        phone.setBrand(brand);
+        model.addAttribute("phone", phone);
+        model.addAttribute("formAction", request.getContextPath() + "/phone/add");
+        return "phone/add";
+    }
 }

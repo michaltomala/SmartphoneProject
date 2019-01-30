@@ -3,6 +3,7 @@ package pl.coderslab.entity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
@@ -20,10 +21,11 @@ public class Phone {
     private String name;
 
     @NotNull
-    @Size(min=100)
+//    @Size(min=100)
+    @Min(100)
     private int price;
 
-    @NotNull
+    @NotBlank
     @Size(min=20)
     private String description;
 

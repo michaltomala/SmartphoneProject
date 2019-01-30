@@ -14,7 +14,7 @@
     <ul>
         <c:forEach items="${brands}" var="brand">
             <li>
-                <h2>${brand.name}</h2>
+                <h2><a href = "${pageContext.request.contextPath}/brand/list/${brand.id}">${brand.name}</a></h2>
                 <p>
                     <a href="${pageContext.request.contextPath}/brand/form/${brand.id}">Edytuj</a>
                     <a href="${pageContext.request.contextPath}/brand/delete/${brand.id}">Usuń</a>

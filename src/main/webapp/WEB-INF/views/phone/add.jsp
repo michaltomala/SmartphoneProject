@@ -37,25 +37,11 @@
                            itemValue="id"
                            itemLabel="name" />
         </form:select>
-        <form:errors path="publisher" cssClass="alert alert-danger" element="div"/>
+        <form:errors path="brand" cssClass="alert alert-danger" element="div"/>
 
+            <%--<form:options  items="${category}"--%>
+                           <%--itemValue="id" />--%>
 
-        <form:select path="authors" multiple="true" cssClass="form-input">
-            <form:option value="0" disabled="true" selected="true">Wybierz autorów</form:option>
-            <form:options  items="${authorsList}"
-                           itemValue="id" />
-        </form:select>
-        <form:errors path="authors" cssClass="alert alert-danger" element="div" />
-
-
-
-
-        <form:select path="category">
-            <form:option value="0" disabled="true" selected="true">Wybierz kategorię</form:option>
-            <form:options  items="${category}"
-                           itemValue="id" />
-        </form:select>
-        <form:errors path="category" cssClass="alert alert-danger" element="div"/>
         <input type="submit"  class="btn btn-success">
     </form:form>
 

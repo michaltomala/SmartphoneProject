@@ -86,6 +86,14 @@ public class PhoneController {
         return "phone/list";
     }
 
+//    przyszłościowo dodać tu też zdjęcie
+    @GetMapping("/phone/list/{id}")
+    public String showAllSmartphonesById(Model model , @PathVariable Long id){
+        Phone phone = phoneRepository.findOne(id);
+        model.addAttribute("phone",phone);
+        return "phone/single";
+    }
+
 
     @ModelAttribute("brandsList")
     public List<Brand> brandsList(){ return brandRepository.findAll(); }

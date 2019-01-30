@@ -9,7 +9,7 @@
 <body>
 
     <h1>${brand.name}</h1>
-    <a href="${pageContext.request.contextPath}/phone/add">Dodaj smartphone marki ${brand.name}</a>
+    <a href="/brand/addphone/${brand.id}">Dodaj smartphone marki ${brand.name}</a>
 
     <ul>
         <c:forEach items="${phones}" var="phone">

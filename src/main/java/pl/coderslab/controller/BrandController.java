@@ -17,9 +17,11 @@ import pl.coderslab.repository.PhoneRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
+// todo zabezpieczenie przed sql injectionem
 public class BrandController {
 
     @Autowired
@@ -99,7 +101,6 @@ public class BrandController {
         return "brand/single";
     }
 
-//    todo do zrobienia jedna metoda do dodawania telefonu konkretnej marki
     @GetMapping("/brand/addphone/{id}")
     public String addPhoneByBrand(Model model , @PathVariable Long id , HttpServletRequest request){
         Brand brand = brandRepository.findOne(id);
@@ -109,4 +110,9 @@ public class BrandController {
         model.addAttribute("formAction", request.getContextPath() + "/phone/add");
         return "phone/add";
     }
+
+    @ModelAttribute("brandsList")
+    public List<Brand> brandsList(){ return brandRepository.findAll(); }
+
+
 }

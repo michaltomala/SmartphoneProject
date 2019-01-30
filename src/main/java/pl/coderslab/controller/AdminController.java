@@ -41,6 +41,7 @@ public class AdminController {
     public String user(Model model){
         model.addAttribute("users",userRepository.findAll());
         return "admin/user";
+//        tooo edycja i usuniecie usera
     }
 
 }

@@ -8,5 +8,18 @@
 </head>
 <body>
 
+    <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+
+    <h1>Users:</h1>
+
+    <a href="${pageContext.request.contextPath}/user/add">Dodaj użytkownika</a>
+
+    <ul>
+        <c:forEach items="${users}" var="user">
+        <li>${user.id}  ${user.login} ${user.email} edytuj usuń</li>
+        </c:forEach>
+    </ul>
+
+
 </body>
 </html>

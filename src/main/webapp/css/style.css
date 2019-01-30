@@ -458,12 +458,8 @@ hr {
     margin-bottom: 50px;
 }
 
-
-
-ul li{
-    display: inline-block;
-    padding: 20px;
-
+nav.navbar.navbar-expand-lg a{
+    font-size: 0.7rem;
 }
 
 footer.footer-section{
@@ -471,3 +467,5 @@ footer.footer-section{
     bottom: 0;
     width: 100%;
 }
+
+

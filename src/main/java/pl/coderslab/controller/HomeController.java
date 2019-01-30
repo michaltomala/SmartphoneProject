@@ -11,7 +11,9 @@ public class HomeController {
     public String redirectHome(){
         return "redirect:/home";
     }
-//todo zrobić widoku ukryty link dla zalogowanego użytkownika i dwa ukryte linki dla zalogowanego admina
+//  todo połączyć header i footer do wszystkich linków
+//   zrobić user controller i ustawienia usera
+
     @GetMapping("/home")
     public String home(){
         return "home";

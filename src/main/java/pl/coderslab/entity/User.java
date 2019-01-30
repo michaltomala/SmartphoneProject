@@ -8,6 +8,7 @@ import pl.coderslab.validator.FullValidationUserGroup;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
+import java.util.List;
 
 @Entity
 public class User {
@@ -34,6 +35,8 @@ public class User {
 
     private boolean isAdmin = false;
 
+    @ManyToMany(mappedBy = "users")
+    private List<Phone> phones;
 
     public User() {
     }
@@ -96,4 +99,11 @@ public class User {
         this.repeatedPassword = repeatedPassword;
     }
 
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
 }

@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
+import java.util.List;
 
 
 @Entity
@@ -32,6 +33,9 @@ public class Phone {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
+
+    @ManyToMany
+    private List<User> users;
 
 
     public Phone() {
@@ -81,5 +85,13 @@ public class Phone {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

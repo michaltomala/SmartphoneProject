@@ -2,21 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Login</title>
-    <%--<link rel="stylesheet" href="css/style.css" type="text/css" />--%>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <style>
-        input, select{
-            display: block;
-            margin:15px 0;
-            width: 100%;
-        }
-    </style>
-    <%--<%@include file="../header.jsp"%>--%>
-</head>
-<body>
+
+    <%@include file="../docHeader.jsp"%>
+    <%@include file="../header.jsp"%>
 
     <form:form method="post"
                action="${formAction}"
@@ -39,6 +27,5 @@
     </form:form>
 
 
-</body>
-<%--<%@include file="../footer.jsp"%>--%>
-</html>
+    <%@include file="../footer.jsp"%>
+

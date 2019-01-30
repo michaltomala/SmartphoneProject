@@ -46,7 +46,7 @@ public class LoginController {
             return "user/login";
         }
 
-        session.setAttribute("user", user);
+        session.setAttribute("user", userToCheck);
         return "redirect:/home";
     }
 
@@ -80,6 +80,7 @@ public class LoginController {
                 return "user/register";
             }
             userRepository.save(user);
+            //todo autologin po rejestracji
             return "redirect:/home";
         } else {
             model.addAttribute("pwdErr", "Hasła muszą być takie same!");

@@ -8,7 +8,15 @@
 </head>
 <body>
 
+    <c:if test="${not empty user}">
+        Zalogowany
+    </c:if>
 
+    <a href="/admin/dashboard">Panel administracyjny</a>
+
+    <c:if test="${not empty user and user.isAdmin == true}">
+        <a href="/admin/dashboard">Panel administracyjny z warunku</a>
+    </c:if>
 
 </body>
 </html>

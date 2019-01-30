@@ -5,17 +5,16 @@
 <html>
 <head>
     <title>Home</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
+<%@include file="header.jsp"%>
 <body>
 
-    <c:if test="${not empty user}">
-        Zalogowany
-    </c:if>
 
-
-    <c:if test="${not empty user and user.isAdmin == true}">
-        <a href="/admin/dashboard">Panel administracyjny z warunku</a>
-    </c:if>
+    <h1>HomePage</h1>
 
 </body>
+
+<%@include file="footer.jsp"%>
+
 </html>

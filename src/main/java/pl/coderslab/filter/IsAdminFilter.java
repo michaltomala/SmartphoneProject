@@ -26,7 +26,6 @@ public class IsAdminFilter implements Filter {
 
         HttpSession session = request.getSession();
 
-        String url = request.getRequestURI();
         User user = (User) session.getAttribute("user");
 
         if(user == null){
@@ -50,40 +49,3 @@ public class IsAdminFilter implements Filter {
 
     }
 }
-
-
-
-
-
-/*
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"*"})
-public class AuthFilter implements Filter {
-
-
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
-
-        HttpSession session = request.getSession();
-
-
-        String url = request.getRequestURI();
-
-        if( (url.equals("/abc") )) {
-            if(session.getAttribute("user") == null){
-                response.sendRedirect(request.getContextPath()+"/login");
-                return;
-            }
-        }
-
-//        if( !(url.equals("/login") || url.equals("/home")) ){
-//            if(session.getAttribute("user") == null){
-//                response.sendRedirect(request.getContextPath()+"/login");
-//                return;
-//            }
-//        }
-
-        chain.doFilter(req, resp);
-    }
-
- */

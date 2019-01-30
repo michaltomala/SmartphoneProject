@@ -8,9 +8,15 @@
 </head>
 <body>
 
+    <c:if test="${not empty user and user.isAdmin == true}">
+        <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+    </c:if>
+
     <h1>Smartphones:</h1>
 
-    <a href="${pageContext.request.contextPath}/phone/add">Dodaj</a>
+    <c:if test="${not empty user and user.isAdmin == true}">
+    <a href="${pageContext.request.contextPath}/admin/phone/add">Dodaj</a>
+    </c:if>
 
     <ul>
         <c:forEach items="${phones}" var="phone">
@@ -19,8 +25,10 @@
                 <h4>${phone.price}</h4>
                 <p>And the description</p>
                 <p>
-                    <a href="${pageContext.request.contextPath}/phone/form/${phone.id}">Edytuj</a>
-                    <a href="${pageContext.request.contextPath}/phone/delete/${phone.id}">Usuń</a>
+                    <c:if test="${not empty user and user.isAdmin == true}">
+                    <a href="${pageContext.request.contextPath}/admin/phone/form/${phone.id}">Edytuj</a>
+                    <a href="${pageContext.request.contextPath}/admin/phone/delete/${phone.id}">Usuń</a>
+                    </c:if>
                 </p>
             </li>
         </c:forEach>

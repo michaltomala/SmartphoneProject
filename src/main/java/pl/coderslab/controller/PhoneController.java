@@ -33,15 +33,14 @@ public class PhoneController {
      * CREATErud
      */
 
-//   todo dokończyć widok
-    @GetMapping("/phone/add")
+    @GetMapping("/admin/phone/add")
     public String addPhone(Model model, HttpServletRequest request) {
         model.addAttribute("phone", new Phone());
-        model.addAttribute("formAction", request.getContextPath() + "/phone/add");
+        model.addAttribute("formAction", request.getContextPath() + "/admin/phone/add");
         return "phone/add";
     }
 
-    @PostMapping("/phone/add")
+    @PostMapping("/admin/phone/add")
     public String savePhone(@Valid Phone phone , BindingResult errors, HttpServletRequest request) {
         if (errors.hasErrors()) {
             return "phone/add";
@@ -58,7 +57,7 @@ public class PhoneController {
      * crUPDATEd
      */
 
-    @GetMapping("/phone/form/{id}")
+    @GetMapping("/admin/phone/form/{id}")
     public String editPhone(Model model, HttpServletRequest request, @PathVariable Long id){
         Phone phone = phoneRepository.findOne(id);
         model.addAttribute("phone", phone);
@@ -70,7 +69,7 @@ public class PhoneController {
      * cruDELETE
      */
 
-    @GetMapping("/phone/delete/{id}")
+    @GetMapping("/admin/phone/delete/{id}")
     public String deletePhone(@ModelAttribute Phone phone, HttpServletRequest request){
         phoneRepository.delete(phone);
 

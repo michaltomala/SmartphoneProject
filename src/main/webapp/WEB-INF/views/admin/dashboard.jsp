@@ -9,8 +9,9 @@
 <body>
 
     <ul><h1>Panel Administracyjny</h1>
-        <li><h2><a href="${pageContext.request.contextPath}/admin/dashboard/brand">Brands</a></h2></li>
-        <li><h2><a href="${pageContext.request.contextPath}/admin/dashboard/phone">Phones</a></h2></li>
+        <li><h2><a href="${pageContext.request.contextPath}/brand/list">Brands</a></h2></li>
+        <li><h2><a href="${pageContext.request.contextPath}/phone/list">Phones</a></h2></li>
+
         <li><h2><a href="${pageContext.request.contextPath}/admin/dashboard/user">Users</a></h2></li>
     </ul>
 </body>

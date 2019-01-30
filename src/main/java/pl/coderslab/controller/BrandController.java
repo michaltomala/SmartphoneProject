@@ -33,14 +33,14 @@ public class BrandController {
     /**
      * CREATErud
      */
-    @GetMapping("/brand/add")
+    @GetMapping("/admin/brand/add")
     public String addBrand(Model model, HttpServletRequest request) {
         model.addAttribute("brand", new Brand());
-        model.addAttribute("formAction", request.getContextPath() + "/brand/add");
+        model.addAttribute("formAction", request.getContextPath() + "/admin/brand/add");
         return "brand/add";
     }
 
-    @PostMapping("/brand/add")
+    @PostMapping("/admin/brand/add")
     public String saveBrand(@Valid Brand brand , BindingResult errors, HttpServletRequest request) {
         if (errors.hasErrors()) {
             return "brand/add";
@@ -57,7 +57,7 @@ public class BrandController {
      * crUPDATEd
      */
 
-    @GetMapping("/brand/form/{id}")
+    @GetMapping("/admin/brand/form/{id}")
     public String editBrand(Model model, HttpServletRequest request, @PathVariable Long id){
         Brand brand = brandRepository.findOne(id);
         model.addAttribute("brand", brand);
@@ -69,7 +69,7 @@ public class BrandController {
      * cruDELETE
      */
 
-    @GetMapping("/brand/delete/{id}")
+    @GetMapping("/admin/brand/delete/{id}")
     public String deleteBrand(@ModelAttribute Brand brand, HttpServletRequest request){
         brandRepository.delete(brand);
 
@@ -101,7 +101,7 @@ public class BrandController {
         return "brand/single";
     }
 
-    @GetMapping("/brand/addphone/{id}")
+    @GetMapping("/admin/brand/addphone/{id}")
     public String addPhoneByBrand(Model model , @PathVariable Long id , HttpServletRequest request){
         Brand brand = brandRepository.findOne(id);
         Phone phone = new Phone();

@@ -8,7 +8,9 @@
 </head>
 <body>
 
-    <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+    <c:if test="${not empty user and user.isAdmin == true}">
+        <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+    </c:if>
 
     <h1>Smartphones:</h1>
 

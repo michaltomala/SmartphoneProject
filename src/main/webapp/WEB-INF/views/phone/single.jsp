@@ -8,9 +8,18 @@
 </head>
 <body>
 
-    <h1>${phone.brand.name} ${phone.name}</h1>
+        <p><a href="${pageContext.request.contextPath}/brand/list/${phone.brand.id}"><-${phone.brand.name}</a></p>
+
+        <p><a href="${pageContext.request.contextPath}/phone/list/"><-Smartphony</a></p>
+
+
+<h1>${phone.brand.name} ${phone.name}</h1>
     <h2>${phone.price}</h2>
     <p>${phone.description}</p>
+    <c:if test="${not empty user and user.isAdmin == true}">
+        <a href="${pageContext.request.contextPath}/admin/phone/form/${phone.id}">Edytuj</a>
+        <a href="${pageContext.request.contextPath}/admin/phone/delete/${phone.id}">Usuń</a>
+    </c:if>
 
 </body>
 </html>

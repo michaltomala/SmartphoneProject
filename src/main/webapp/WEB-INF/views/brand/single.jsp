@@ -8,17 +8,30 @@
 </head>
 <body>
 
-    <h1>${brand.name}</h1>
-    <a href="/brand/addphone/${brand.id}">Dodaj smartphone marki ${brand.name}</a>
+    <c:if test="${not empty brand}">
+        <p><a href="${pageContext.request.contextPath}/brand/list"><-Marki</a></p>
+    </c:if>
+
+    <c:if test="${not empty phone}">
+        <p><a href="${pageContext.request.contextPath}/phone/list"><-Smartphony</a></p>
+    </c:if>
+
+    <h1>Smartphony ${brand.name}</h1>
+
+    <c:if test="${not empty user and user.isAdmin == true}">
+        <a href="/admin/brand/addphone/${brand.id}">Dodaj smartphone marki ${brand.name}</a>
+    </c:if>
 
     <ul>
         <c:forEach items="${phones}" var="phone">
             <li>
-                <h2>${phone.name}</h2>
-                <h4>${phone.price}</h4>
+                <h2>${phone.brand.name} <a href = "${pageContext.request.contextPath}/phone/list/${phone.id}">${phone.name}</a></h2>
+                <h4>${phone.price}zł</h4>
                 <p>
-                    <a href="${pageContext.request.contextPath}/phone/form/${phone.id}">Edytuj</a>
-                    <a href="${pageContext.request.contextPath}/phone/delete/${phone.id}">Usuń</a>
+                    <c:if test="${not empty user and user.isAdmin == true}">
+                    <a href="${pageContext.request.contextPath}/admin/phone/form/${phone.id}">Edytuj</a>
+                    <a href="${pageContext.request.contextPath}/admin/phone/delete/${phone.id}">Usuń</a>
+                    </c:if>
                 </p>
             </li>
         </c:forEach>

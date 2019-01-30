@@ -25,23 +25,11 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-    @GetMapping("/admin/dashboard/brand")
-    public String brand(Model model){
-        model.addAttribute("brands",brandRepository.findAll());
-        return "admin/brand";
-    }
-
-    @GetMapping("/admin/dashboard/phone")
-    public String phones(Model model){
-        model.addAttribute("phones",phoneRepository.findAll());
-        return "admin/phone";
-    }
-
     @GetMapping("/admin/dashboard/user")
     public String user(Model model){
         model.addAttribute("users",userRepository.findAll());
         return "admin/user";
-//        tooo edycja i usuniecie usera
+//        todo edycja i usuniecie usera
     }
 
 }

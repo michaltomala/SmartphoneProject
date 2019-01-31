@@ -16,16 +16,14 @@ public class UserController {
 
 
     @GetMapping("/user/{id}")
-    @ResponseBody
     public String showUser(HttpSession session , @PathVariable Long id){
-        return "pokazuje Ci tutaj twoje artykuły i ulubione smartphony "+id;
+        return "user/user";
     }
 
 
     @GetMapping("/settings/{id}")
-    @ResponseBody
     public String settings(HttpSession session , @PathVariable Long id){
-        return "pokazuje Ci tutaj ustawienia"+id;
+        return "user/settings";
     }
 
 }

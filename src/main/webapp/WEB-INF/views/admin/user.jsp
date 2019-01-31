@@ -17,7 +17,7 @@
 
     <%@include file="../header.jsp"%>
 
-    <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+    <a href="${pageContext.request.contextPath}/admin/dashboard"><-Panel Administratora</a>
 
     <h1>Users:</h1>
 

@@ -62,4 +62,20 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
 
+//todo PLAN :
+//   zrobić w nich ustawienia i ulubione rzeczy poszczególnego usera
+//  błedy przy dodawaniu  -  polski komunikat
+//  w dashboard administratora dać opcję edycji / usunięcia usera
+//  zabezpieczyć przypadkowe usuniecie potwierdzeniem
+//  dodawanie i usuwanie ulubionych telefonów użytkownika
+//  rozdzielić na serwisy
+//  rest api
+
+
+
+//    todo parsowanie artykułów + artykuły
+//    todo parsowanie cen z serwisem w momencie wywołania smartphonów
+//    todo zaawansowane wyszukiwanie
+//    todo algorytm doradzania
+//    todo fajne ostylowanie (wywalenie bootstrapa i swoje style)
 }

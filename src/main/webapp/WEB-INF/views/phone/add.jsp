@@ -15,6 +15,9 @@
 </head>
 <body>
 
+    <p><a href="${pageContext.request.contextPath}/phone/list/"><-Wróć</a></p>
+
+
     <form:form method="post"
                action="${formAction}"
                modelAttribute="phone"
@@ -44,6 +47,8 @@
 
         <input type="submit"  class="btn btn-success">
     </form:form>
+
+
 
 </body>
 </html>

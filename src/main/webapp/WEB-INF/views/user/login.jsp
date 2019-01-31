@@ -3,8 +3,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <%@include file="../docHeader.jsp"%>
-    <%@include file="../header.jsp"%>
+<html>
+<head>
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <%-- wiem że nie można tak robic - w przyszłości bedzie to zmienione !!! --%>
+    <style>
+        input, select{
+            display: block;
+            margin:15px 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="${pageContext.request.contextPath}/"><-Strona domowa</a>
 
     <form:form method="post"
                action="${formAction}"
@@ -27,5 +41,7 @@
     </form:form>
 
 
-    <%@include file="../footer.jsp"%>
+
+</body>
+</html>
 

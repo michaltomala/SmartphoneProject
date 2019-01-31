@@ -5,8 +5,18 @@
 <html>
 <head>
     <title>Single Brand</title>
+    <style>
+        footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
+    <%@include file="../header.jsp"%>
+
 
     <c:if test="${not empty brand}">
         <p><a href="${pageContext.request.contextPath}/brand/list"><-Marki</a></p>
@@ -36,6 +46,9 @@
             </li>
         </c:forEach>
     </ul>
+
+    <%@include file="../footer.jsp"%>
+
 
 </body>
 </html>

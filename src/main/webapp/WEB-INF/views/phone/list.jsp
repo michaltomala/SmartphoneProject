@@ -5,12 +5,24 @@
 <html>
 <head>
     <title>Smartphones</title>
+    <style>
+        footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        }
+    </style>
 </head>
 <body>
 
+    <%@include file="../header.jsp"%>
+
     <c:if test="${not empty user and user.isAdmin == true}">
-        <a href="${pageContext.request.contextPath}/admin/dashboard"><-</a>
+        <a href="${pageContext.request.contextPath}/admin/dashboard"><-Panel Administracyjny<br/></a>
     </c:if>
+
+    <a href="${pageContext.request.contextPath}/"><-Strona domowa</a>
+
 
     <h1>Smartphones:</h1>
 
@@ -34,7 +46,7 @@
         </c:forEach>
     </ul>
 
-
+<%@include file="../footer.jsp"%>
 
 </body>
 </html>

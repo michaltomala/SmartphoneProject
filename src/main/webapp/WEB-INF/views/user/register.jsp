@@ -6,6 +6,7 @@
 <head>
     <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<%-- wiem że nie można tak robic - w przyszłości bedzie to zmienione !!! --%>
     <style>
         input, select{
             display: block;
@@ -13,9 +14,10 @@
             width: 100%;
         }
     </style>
-    <%--<%@include file="../header.jsp"%>--%>
 </head>
 <body>
+
+    <a href="${pageContext.request.contextPath}/"><-Strona domowa</a>
 
     <form:form method="post"
                action="${formAction}"

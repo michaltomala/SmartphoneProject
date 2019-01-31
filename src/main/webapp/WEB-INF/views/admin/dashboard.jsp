@@ -5,8 +5,17 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <style>
+        footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
+    <%@include file="../header.jsp"%>
 
     <ul><h1>Panel Administracyjny</h1>
         <li><h2><a href="${pageContext.request.contextPath}/brand/list">Brands</a></h2></li>
@@ -14,5 +23,8 @@
 
         <li><h2><a href="${pageContext.request.contextPath}/admin/dashboard/user">Users</a></h2></li>
     </ul>
+
+    <%@include file="../footer.jsp"%>
+
 </body>
 </html>

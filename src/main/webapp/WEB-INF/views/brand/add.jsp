@@ -14,6 +14,9 @@
 </head>
 <body>
 
+    <p><a href="${pageContext.request.contextPath}/brand/list/"><-Wróć</a></p>
+
+
     <form:form method="post"
                action="${formAction}"
                modelAttribute="brand"

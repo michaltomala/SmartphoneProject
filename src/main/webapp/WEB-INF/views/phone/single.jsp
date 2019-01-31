@@ -5,8 +5,18 @@
 <html>
 <head>
     <title>Single Phone</title>
+    <style>
+        footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
+    <%@include file="../header.jsp"%>
+
 
         <p><a href="${pageContext.request.contextPath}/brand/list/${phone.brand.id}"><-${phone.brand.name}</a></p>
 
@@ -20,6 +30,8 @@
         <a href="${pageContext.request.contextPath}/admin/phone/form/${phone.id}">Edytuj</a>
         <a href="${pageContext.request.contextPath}/admin/phone/delete/${phone.id}">Usuń</a>
     </c:if>
+
+    <%@include file="../footer.jsp"%>
 
 </body>
 </html>

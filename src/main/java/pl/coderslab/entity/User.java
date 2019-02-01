@@ -17,19 +17,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = {Default.class, FullValidationUserGroup.class})
+    @NotBlank(groups = {Default.class, FullValidationUserGroup.class}, message = "Login nie może być pusty!")
     @Column(unique = true)
     private String login;
 
-    @NotBlank(groups = {Default.class, FullValidationUserGroup.class})
-    @Size(min = 6, groups = {Default.class, FullValidationUserGroup.class})
+    @Size(min = 6, groups = {Default.class, FullValidationUserGroup.class} , message = "Hasło musi mieć minimum 6 znaków")
     private String password;
 
     @Transient
     private String repeatedPassword;
 
-    @NotBlank(groups = FullValidationUserGroup.class)
-    @Email(groups = FullValidationUserGroup.class)
+    @NotBlank(groups = FullValidationUserGroup.class , message = "Email nie może być pusty!")
+    @Email(groups = FullValidationUserGroup.class , message = "Niepoprawny Email!")
     @Column(unique = true)
     private String email;
 

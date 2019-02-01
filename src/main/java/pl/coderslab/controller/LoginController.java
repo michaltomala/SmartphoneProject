@@ -88,7 +88,7 @@ public class LoginController {
 
         }
     }
-
+//        todo zaktualizowac nazwy przycisków
     public boolean isLogedIn(HttpSession sess) {
         return (sess.getAttribute("user") != null);
     }

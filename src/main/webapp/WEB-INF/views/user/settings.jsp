@@ -30,7 +30,9 @@
         <form:hidden path="id" />
 
         <form:input path="login" placeholder="login" cssClass="form-input"/>
-        <form:errors path="login" cssClass="alert alert-danger" element="div" />
+            <c:if test="${not empty pwdErr}">
+                <div class="alert alert-danger">${pwdErr}</div>
+            </c:if>
 
         <input type="submit"  class="btn btn-success"><br/>
         </form:form>
@@ -47,10 +49,15 @@
         <form:hidden path="id" />
 
         <form:password path="password" placeholder="password" cssClass="form-input"/>
-        <form:errors path="password" cssClass="alert alert-danger" element="div" />
+            <c:if test="${not empty pwdErr}">
+                <div class="alert alert-danger">${pwdErr}</div>
+            </c:if>
 
         <form:password path="repeatedPassword" placeholder="repeat password" cssClass="form-input"/>
-        <form:errors path="repeatedPassword" cssClass="alert alert-danger" element="div" /><br/>
+            <c:if test="${not empty pwdErr}">
+                <div class="alert alert-danger">${pwdErr}</div>
+            </c:if>
+
 
         <input type="submit"  class="btn btn-success">
         </form:form>
@@ -68,7 +75,9 @@
         <form:hidden path="id" />
 
         <form:input path="email" placeholder="email" cssClass="form-input"/>
-        <form:errors path="email" cssClass="alert alert-danger" element="div" />
+            <c:if test="${not empty pwdErr}">
+                <div class="alert alert-danger">${pwdErr}</div>
+            </c:if>
 
         <input type="submit"  class="btn btn-success"><br/>
         </form:form>

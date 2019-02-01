@@ -60,7 +60,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String saveUser(Model model, HttpServletRequest request, @Validated({FullValidationUserGroup.class}) User user, BindingResult errors) {
+    public String saveUser(Model model, HttpServletRequest request, @Validated({FullValidationUserGroup.class}) User user, BindingResult errors,HttpSession session) {
 
         if (errors.hasErrors()) {
             return "user/register";
@@ -80,6 +80,7 @@ public class LoginController {
                 return "user/register";
             }
             userRepository.save(user);
+            session.setAttribute("user",user);
             //todo autologin po rejestracji
             return "redirect:/home";
         } else {

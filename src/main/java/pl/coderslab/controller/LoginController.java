@@ -81,7 +81,6 @@ public class LoginController {
             }
             userRepository.save(user);
             session.setAttribute("user",user);
-            //todo autologin po rejestracji
             return "redirect:/home";
         } else {
             model.addAttribute("pwdErr", "Hasła muszą być takie same!");

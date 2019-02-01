@@ -72,8 +72,11 @@ public class UserController {
     }
 
     @PostMapping("/settings/{action}/{id}")
-    public String saveUser(@ModelAttribute User user, HttpServletRequest request,@PathVariable Long id,@PathVariable String action , HttpSession session) {
-
+    public String saveUser( @ModelAttribute User user, HttpServletRequest request,@PathVariable Long id,@PathVariable String action , HttpSession session) {
+//        @Validated({FullValidationUserGroup.class}) User userToValid, BindingResult errors,
+//        if (errors.hasErrors()) {
+//            return "user/settings";
+//        }
 
         User userToSave = userRepository.findOne(id);
         switch(action){

@@ -15,10 +15,13 @@ public class InitApplicationService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * In my app there is only one admin - created during server started
+     */
     public void initAdmin(){
         System.out.println("INIT APP");
-        List<User> users = userRepository.findAll();
-        if( users.size() == 0) {
+        User userToCheck = userRepository.findOne((long) 1);
+        if( userToCheck == null) {
             User user = new User();
             user.setLogin("admin");
             user.setPassword("123456");

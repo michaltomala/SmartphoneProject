@@ -79,4 +79,6 @@ public class AppConfig implements WebMvcConfigurer {
 //    todo zaawansowane wyszukiwanie
 //    todo algorytm doradzania
 //    todo fajne ostylowanie (wywalenie bootstrapa i swoje style)
+
+//      todo zrobić profil na githubie
 }

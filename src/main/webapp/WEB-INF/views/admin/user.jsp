@@ -21,11 +21,37 @@
 
     <h1>Users:</h1>
 
-    <a href="${pageContext.request.contextPath}/user/add">Dodaj użytkownika</a>
 
     <ul>
         <c:forEach items="${users}" var="user">
-        <li>${user.id}  ${user.login} ${user.email} edytuj usuń</li>
+        <li>${user.id}  ${user.login} ${user.email}
+            <a href="${pageContext.request.contextPath}/admin/dashboard/user/${user.id}">edytuj</a>
+            <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${user.id}">usuń</a>
+            <c:if test="${editingUser.id == user.id}">
+                <form:form method="post"
+                           action="${formAction}"
+                           modelAttribute="editingUser">
+                    <form:hidden path="id" />
+
+                    <form:input path="login" value="${editingUser.login}" />
+                    <form:errors path="login"  />
+
+                    <form:input path="email" value="${editingUser.email}" />
+                    <form:errors path="email" />
+
+                    <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
+
+                    <input type="submit"  class="btn btn-success">
+                </form:form>
+
+            </c:if>
+            <c:if test="${not empty confirm and editingUser.id == user.id}">
+                Potwierdź usunięcie tego użytkownika!
+                <a href="${pageContext.request.contextPath}/admin/dashboard/delete/${user.id}">Tak</a>
+                <a href="${pageContext.request.contextPath}/admin/dashboard/user">Nie</a>
+            </c:if>
+
+        </li>
         </c:forEach>
     </ul>
 

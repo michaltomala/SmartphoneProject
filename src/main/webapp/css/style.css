@@ -463,7 +463,21 @@
     /*margin-bottom: 50px;*/
 /*}*/
 
+body{
+    /*background-image: url("../images/best_android_smartphone_2018.jpg");*/
+    /*background-image: -webkit-image-set("../images/best_android_smartphone_2018.jpg");*/
+    /*background-repeat: repeat;*/
 
+    /*background-color: #3685ff;*/
+
+    background-image: url("../images/nex.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #a50b0f;
+}
+a{
+    color: #9a007b;
+}
 footer{
     position: fixed;
     bottom: 0;

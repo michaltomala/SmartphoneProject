@@ -92,6 +92,7 @@ public class UserController {
         if(!violations.isEmpty()){
             for (ConstraintViolation<User> err:violations){
                 Path property = err.getPropertyPath();
+
                 if(property.toString().equals("login") ){
                     if(user.getLogin().equals("")){
                         model.addAttribute("pwdErr", "Musisz podać nazwę !");

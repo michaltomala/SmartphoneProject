@@ -24,7 +24,6 @@ public class InitApplicationService {
             user.setPassword("123456");
             user.setEmail("admin@admin.pl");
             user.setAdmin(true);
-//     todo przeniesienie do serwisu
             user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             userRepository.save(user);
         }

@@ -26,7 +26,11 @@
         <c:forEach items="${users}" var="user">
         <li>${user.id}  ${user.login} ${user.email}
             <a href="${pageContext.request.contextPath}/admin/dashboard/user/${user.id}">edytuj</a>
-            <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${user.id}">usuń</a>
+
+            <c:if test="${user.id  !=  admin.id}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${user.id}">usuń</a>
+            </c:if>
+
             <c:if test="${editingUser.id == user.id}">
                 <form:form method="post"
                            action="${formAction}"
@@ -37,15 +41,28 @@
                     <form:input path="login" value="${editingUser.login}" />
                     <form:errors path="login"/>
 
+
                     <form:input path="email" value="${editingUser.email}" />
                     <form:errors path="email" />
 
-                    <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
+                    <c:if test="${editingUser.id != 1}">
+                        <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
+                    </c:if>
+
                     <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
+
+                    <c:if test="${not empty loginErr}">
+                        <div class="alert alert-danger">${loginErr}</div>
+                    </c:if>
+                    <c:if test="${not empty emailErr}">
+                        <div class="alert alert-danger">${emailErr}</div>
+                    </c:if>
+
+
                 </form:form>
 
             </c:if>
-            <c:if test="${not empty confirm and editingUser.id == user.id}">
+            <c:if test="${not empty confirm and deletingUser.id == user.id}">
                 Potwierdź usunięcie tego użytkownika!
                 <a href="${pageContext.request.contextPath}/admin/dashboard/delete/${user.id}">Tak</a>
                 <a href="${pageContext.request.contextPath}/admin/dashboard/user">Nie</a>

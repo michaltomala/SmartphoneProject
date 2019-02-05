@@ -37,7 +37,7 @@
             <div class="alert alert-danger">${errDB}</div>
         </c:if>
 
-        <input type="submit"  class="btn btn-success">
+        <input type="submit" value="Zaloguj" class="btn btn-success">
     </form:form>
 
 

@@ -3,6 +3,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.validator.AdminValidationUserGroup;
 import pl.coderslab.validator.FullValidationUserGroup;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = {Default.class, FullValidationUserGroup.class}, message = "Login nie może być pusty!")
+    @NotBlank(groups = {Default.class, FullValidationUserGroup.class, AdminValidationUserGroup.class}, message = "Login nie może być pusty!")
     @Column(unique = true)
     private String login;
 
@@ -27,8 +28,8 @@ public class User {
     @Transient
     private String repeatedPassword;
 
-    @NotBlank(groups = FullValidationUserGroup.class , message = "Email nie może być pusty!")
-    @Email(groups = FullValidationUserGroup.class , message = "Niepoprawny Email!")
+    @NotBlank(groups = {FullValidationUserGroup.class , AdminValidationUserGroup.class} , message = "Email nie może być pusty!")
+    @Email(groups = {FullValidationUserGroup.class , AdminValidationUserGroup.class} , message = "Niepoprawny Email!")
     @Column(unique = true)
     private String email;
 

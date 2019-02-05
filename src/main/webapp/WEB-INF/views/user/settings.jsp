@@ -34,7 +34,7 @@
                 <div class="alert alert-danger">${pwdErr}</div>
             </c:if>
 
-        <input type="submit"  class="btn btn-success"><br/>
+        <input type="submit" value="Zapisz zmiany" class="btn btn-success"><br/>
         </form:form>
     </c:if>
 
@@ -59,7 +59,7 @@
             </c:if>
 
 
-        <input type="submit"  class="btn btn-success">
+        <input type="submit" value="Zapisz zmiany" class="btn btn-success">
         </form:form>
     </c:if>
 
@@ -79,7 +79,7 @@
                 <div class="alert alert-danger">${pwdErr}</div>
             </c:if>
 
-        <input type="submit"  class="btn btn-success"><br/>
+        <input type="submit" value="Zapisz zmiany" class="btn btn-success"><br/>
         </form:form>
     </c:if>
 

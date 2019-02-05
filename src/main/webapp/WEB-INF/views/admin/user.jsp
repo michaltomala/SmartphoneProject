@@ -32,16 +32,16 @@
                            action="${formAction}"
                            modelAttribute="editingUser">
                     <form:hidden path="id" />
+                    <form:hidden path="password" />
 
                     <form:input path="login" value="${editingUser.login}" />
-                    <form:errors path="login"  />
+                    <form:errors path="login"/>
 
                     <form:input path="email" value="${editingUser.email}" />
                     <form:errors path="email" />
 
                     <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
-
-                    <input type="submit"  class="btn btn-success">
+                    <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
                 </form:form>
 
             </c:if>

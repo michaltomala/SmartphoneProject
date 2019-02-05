@@ -43,7 +43,7 @@
         <form:errors path="email" cssClass="alert alert-danger" element="div" />
 
 
-        <input type="submit"  class="btn btn-success">
+        <input type="submit" value="Zarejestruj" class="btn btn-success">
     </form:form>
 
 

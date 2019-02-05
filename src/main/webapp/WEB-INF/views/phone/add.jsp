@@ -45,7 +45,7 @@
             <%--<form:options  items="${category}"--%>
                            <%--itemValue="id" />--%>
 
-        <input type="submit"  class="btn btn-success">
+        <input type="submit" value="Dodaj" class="btn btn-success">
     </form:form>
 
 

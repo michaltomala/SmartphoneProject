@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,10 +14,13 @@ import pl.coderslab.entity.User;
 import pl.coderslab.repository.BrandRepository;
 import pl.coderslab.repository.PhoneRepository;
 import pl.coderslab.repository.UserRepository;
+import pl.coderslab.validator.AdminValidationUserGroup;
 import pl.coderslab.validator.FullValidationUserGroup;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -51,14 +55,28 @@ public class AdminController {
     }
 
     @PostMapping("/admin/dashboard/user/{id}")
-    public String update(@Validated({FullValidationUserGroup.class}) User user , BindingResult errors, HttpServletRequest req){
+    public String update(@Validated({AdminValidationUserGroup.class}) User user , BindingResult errors, HttpServletRequest req, Model model, HttpSession session){
         if (errors.hasErrors()) {
+
+            List<ObjectError> allErrors = errors.getAllErrors();
+            for(ObjectError err : allErrors){
+                System.out.println(err.toString());
+            }
+//            todo: wyświetlić błędy walidacji w widoku
+            model.addAttribute("errors",errors);
+            model.addAttribute("user",session.getAttribute("user"));
+            model.addAttribute("editingUser",user);
             return "admin/user";
+
+//            todo zrobic porzadek z nazwami błedów w widokach (żeby nie było wszędzie pwdErro)
         }
+
         userRepository.save(user);
 //  todo zmiana napisu w przuciskach (w widokach)
         return "redirect:"+req.getContextPath()+"/admin/dashboard/user";
     }
+
+
     @GetMapping("/admin/dashboard/confirm/{id}")
     public String confirm(Model model,HttpServletRequest request,@PathVariable Long id){
         User user = userRepository.findOne(id);

@@ -26,7 +26,7 @@
         <form:input path="name" placeholder="Nazwa" cssClass="form-input"/>
         <form:errors path="name" cssClass="alert alert-danger" element="div" />
 
-        <input type="submit"  class="btn btn-success">
+        <input type="submit" value="Dodaj" class="btn btn-success">
     </form:form>
 
 

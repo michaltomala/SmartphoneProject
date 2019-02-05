@@ -28,6 +28,9 @@
         <form:input path="name" placeholder="nazwa" cssClass="form-input"/>
         <form:errors path="name" cssClass="alert alert-danger" element="div" />
 
+        <c:if test="${not empty nameErr}">
+            <div class="alert alert-danger">${nameErr}</div>
+        </c:if>
         <form:input path="price" placeholder="cena"  cssClass="form-input"/>
         <form:errors path="price" cssClass="alert alert-danger" element="div"/>
 

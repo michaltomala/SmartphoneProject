@@ -17,20 +17,17 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nazwa telefonu nie moźe być pusta!")
     @Column(unique = true)
-    @NotBlank
     private String name;
 
-    @NotNull
-//    @Size(min=100)
-    @Min(100)
+    @Min(value = 100 , message = "Cena telefonu musi być większa od 100zł!")
     private int price;
 
-    @NotBlank
-    @Size(min=20)
+    @Size(min=20 , message = "Opis musi być większy!")
     private String description;
 
-    @NotNull
+    @NotNull(message = "Musisz wybrac markę!")
     @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
 

@@ -9,5 +9,7 @@ import java.util.List;
 public interface PhoneRepository extends JpaRepository<Phone, Long> {
 
     List<Phone> findAllByBrand(Brand brand);
+    Phone findFirstByName(String name);
+
 }
 

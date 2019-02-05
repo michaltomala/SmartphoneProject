@@ -41,11 +41,18 @@ public class PhoneController {
     }
 
     @PostMapping("/admin/phone/add")
-    public String savePhone(@Valid Phone phone , BindingResult errors, HttpServletRequest request) {
+    public String savePhone(@Valid Phone phone , BindingResult errors, HttpServletRequest request,Model model) {
         if (errors.hasErrors()) {
             return "phone/add";
         }
-        phoneRepository.save(phone);
+
+        Phone phoneToCheck = phoneRepository.findFirstByName(phone.getName());
+        if (phoneToCheck != null && !phoneToCheck.getId().equals(phone.getId())){
+            model.addAttribute("nameErr", "Taki telefon już istnieje!");
+            return "phone/add";
+        }
+
+            phoneRepository.save(phone);
         return "redirect:"+request.getContextPath()+"/phone/list";
     }
 
@@ -61,7 +68,7 @@ public class PhoneController {
     public String editPhone(Model model, HttpServletRequest request, @PathVariable Long id){
         Phone phone = phoneRepository.findOne(id);
         model.addAttribute("phone", phone);
-        model.addAttribute("formAction", request.getContextPath()+"/phone/add");
+        model.addAttribute("formAction", request.getContextPath()+"/admin/phone/add");
         return "phone/add";
     }
 

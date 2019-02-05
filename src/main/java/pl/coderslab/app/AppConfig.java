@@ -65,9 +65,7 @@ public class AppConfig implements WebMvcConfigurer {
 //todo PLAN :
 //   zrobić w nich ustawienia i ulubione rzeczy poszczególnego usera
 //  błedy przy dodawaniu  -  polski komunikat
-//  w dashboard administratora dać opcję edycji / usunięcia usera
-//  zabezpieczyć przypadkowe usuniecie potwierdzeniem
-//  app initializer -nie pobierac wszystkich uzytkowników tylko pierwszego
+//  w dashboard administratora dać opcję edycji
 //  dodawanie i usuwanie ulubionych telefonów użytkownika
 //  rozdzielić na serwisy
 //  rest api

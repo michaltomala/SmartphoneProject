@@ -41,8 +41,14 @@ public class BrandController {
     }
 
     @PostMapping("/admin/brand/add")
-    public String saveBrand(@Valid Brand brand , BindingResult errors, HttpServletRequest request) {
+    public String saveBrand(@Valid Brand brand , BindingResult errors, HttpServletRequest request , Model model) {
         if (errors.hasErrors()) {
+            return "brand/add";
+        }
+
+        Brand brandToCheck = brandRepository.findFirstByName(brand.getName());
+        if (brandToCheck != null && !brandToCheck.getId().equals(brand.getId())) {
+            model.addAttribute("nameErr", "Taka marka już istnieje !");
             return "brand/add";
         }
         brandRepository.save(brand);
@@ -61,7 +67,7 @@ public class BrandController {
     public String editBrand(Model model, HttpServletRequest request, @PathVariable Long id){
         Brand brand = brandRepository.findOne(id);
         model.addAttribute("brand", brand);
-        model.addAttribute("formAction", request.getContextPath()+"/brand/add");
+        model.addAttribute("formAction", request.getContextPath()+"/admin/brand/add");
         return "brand/add";
     }
 

@@ -26,6 +26,9 @@
         <form:input path="name" placeholder="Nazwa" cssClass="form-input"/>
         <form:errors path="name" cssClass="alert alert-danger" element="div" />
 
+        <c:if test="${not empty nameErr}">
+            <div class="alert alert-danger">${nameErr}</div>
+        </c:if>
         <input type="submit" value="Dodaj" class="btn btn-success">
     </form:form>
 

@@ -16,7 +16,7 @@ public class Brand {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "Nazwa marki nie moźe być pusta!")
     private String name;
 
 

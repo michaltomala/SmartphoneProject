@@ -33,7 +33,13 @@
     <ul>
         <c:forEach items="${phones}" var="phone">
             <li>
-                <h2><a href="${pageContext.request.contextPath}/brand/list/${brand.id}">${phone.brand.name}</a> <a href=${pageContext.request.contextPath}/phone/list/${phone.id}>${phone.name}</a></h2>
+                <h2>
+                    <a href="${pageContext.request.contextPath}/brand/list/${brand.id}">${phone.brand.name}</a>
+                    <a href=${pageContext.request.contextPath}/phone/list/${phone.id}>${phone.name}</a>
+                    <c:if test="${not empty user}">
+                    <a href="${pageContext.request.contextPath}/user/phone/add/${phone.id}">Dodaj do ulubionych</a>
+                    </c:if>
+                </h2>
                 <h4>${phone.price}</h4>
                 <p>And the description</p>
                 <p>

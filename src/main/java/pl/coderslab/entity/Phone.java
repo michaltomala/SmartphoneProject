@@ -31,9 +31,10 @@ public class Phone {
     @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users;
 
+//  todo   przyszłościowo dodać tu też zdjęcie
 
     public Phone() {
     }

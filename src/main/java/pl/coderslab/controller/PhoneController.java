@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Brand;
 import pl.coderslab.entity.Phone;
+import pl.coderslab.entity.User;
 import pl.coderslab.repository.BrandRepository;
 import pl.coderslab.repository.PhoneRepository;
+import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class PhoneController {
     @Autowired
     private BrandRepository brandRepository;
 
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * CREATErud
@@ -56,6 +61,20 @@ public class PhoneController {
         return "redirect:"+request.getContextPath()+"/phone/list";
     }
 
+    /**
+     * Add phone to favorite user (user from session)
+     */
+    @GetMapping("/user/phone/add/{id}")
+    public String addFavoriteSmartphone(@PathVariable Long id , HttpSession session){
+        Phone phone = phoneRepository.findOne(id);
+        User userFromSession = (User) session.getAttribute("user");
+        User user = userRepository.findFirstByLogin(userFromSession.getLogin());
+        user.addFavoriteSmartphone(phone);
+        userRepository.save(user);
+        session.setAttribute("user",user);
+//       todo dodawanie ulubionych smartphonów
+        return "redirect:/phone/list";
+    }
     /**
      * cREADud
      */
@@ -89,9 +108,10 @@ public class PhoneController {
     public String showAll(Model model){
         model.addAttribute("phones",phoneRepository.findAll());
         return "phone/list";
+//   todo zrobić tak,żeby w widoku pojawiało się maksymalnie 20 telefonów
     }
 
-//    przyszłościowo dodać tu też zdjęcie
+
     @GetMapping("/phone/list/{id}")
     public String showAllSmartphonesById(Model model , @PathVariable Long id){
         Phone phone = phoneRepository.findOne(id);

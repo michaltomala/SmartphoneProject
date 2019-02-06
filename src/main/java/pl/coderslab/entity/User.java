@@ -41,12 +41,22 @@ public class User {
     public User() {
     }
 
+    public void deleteFavoriteSmartphone(Phone phone){
+        this.phones.remove(phone);
+    }
+
+    public void addFavoriteSmartphone(Phone phone){
+        this.phones.add(phone);
+    }
+
+
+
+
 
     @Override
     public String toString() {
         return this.login;
     }
-
 
     public Long getId() {
         return id;

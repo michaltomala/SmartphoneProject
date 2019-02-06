@@ -29,7 +29,9 @@
                     <a href=${pageContext.request.contextPath}/phone/list/${phone.id}>${phone.name}</a>
                         ${phone.price} zł
                     <a href="${pageContext.request.contextPath}/phone/list/${phone.id}"">Pokaż cały opis</a>
+                    <a href="${pageContext.request.contextPath}/user/phone/delete/${phone.id}">Usuń</a>
                 </h4>
+
             </li>
         </c:forEach>
     </ul>

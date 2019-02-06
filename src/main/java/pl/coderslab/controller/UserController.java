@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Phone;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.PhoneRepository;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.validator.FullValidationUserGroup;
 
@@ -34,6 +35,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
+    private PhoneRepository phoneRepository;
+
+    @Autowired
     Validator validator;
 
     @GetMapping("/user/{id}")
@@ -47,18 +51,17 @@ public class UserController {
 
         model.addAttribute("phones",phones);
         return "user/user";
-/*
-            <c:forEach items="phones" var="phone">
-                <h4>${phone.price}</h4>
-                <p>${phone.brand.name}</p>
-                <p>${phone.name}</p>
-                <a href="${pageContext.request.contextPath}/phone/list/${phone.id}"">show all description</a>
-            </c:forEach>
 
- */
 //        TODO: zrobić w widoku dodawanie smartphona do ulubionych - tam zrobić tą zaawansowaną wyszukiwarke
 //        przy pomocy algorytmu
+    }
 
+    @GetMapping("/user/phone/delete/{id}")
+    public String deleteFavoriteSmartphone(@PathVariable Long id , HttpSession session){
+        Phone phone = phoneRepository.findOne(id);
+        User user = (User) session.getAttribute("user");
+        user.deleteFavoriteSmartphone(phone);
+        return "user/user";
     }
 
 

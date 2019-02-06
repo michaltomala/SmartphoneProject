@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.Phone;
 import pl.coderslab.entity.User;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.validator.FullValidationUserGroup;
@@ -20,6 +21,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import javax.validation.Validator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -36,8 +38,27 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public String showUser(HttpSession session , @PathVariable Long id, Model model){
+        User user = userRepository.findOne(id);
+        User userToCheck = (User) session.getAttribute("user");
+        if(!user.getId().equals(userToCheck.getId())){
+            return "redirect:/login";
+        }
+        List<Phone> phones = user.getPhones();
 
-        return "redirect:/";
+        model.addAttribute("phones",phones);
+        return "user/user";
+/*
+            <c:forEach items="phones" var="phone">
+                <h4>${phone.price}</h4>
+                <p>${phone.brand.name}</p>
+                <p>${phone.name}</p>
+                <a href="${pageContext.request.contextPath}/phone/list/${phone.id}"">show all description</a>
+            </c:forEach>
+
+ */
+//        TODO: zrobić w widoku dodawanie smartphona do ulubionych - tam zrobić tą zaawansowaną wyszukiwarke
+//        przy pomocy algorytmu
+
     }
 
 
@@ -148,6 +169,7 @@ public class UserController {
 
         return "redirect:"+request.getContextPath()+"/settings/"+id;
     }
+
 
 
 }

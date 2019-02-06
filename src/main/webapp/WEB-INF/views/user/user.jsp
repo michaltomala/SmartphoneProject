@@ -19,7 +19,24 @@
     <a href="${pageContext.request.contextPath}/"><-Strona Główna</a><br/>
 
 
-    pokazuje Ci tutaj twoje artykuły i ulubione smartphony
+    <h1>Twoje ulubione smartphony: </h1>
+
+    <ul>
+        <c:forEach items="${phones}" var="phone">
+            <li>
+                <h4>
+                    <a href="${pageContext.request.contextPath}/brand/list/${brand.id}">${phone.brand.name}</a>
+                    <a href=${pageContext.request.contextPath}/phone/list/${phone.id}>${phone.name}</a>
+                        ${phone.price} zł
+                    <a href="${pageContext.request.contextPath}/phone/list/${phone.id}"">Pokaż cały opis</a>
+                </h4>
+            </li>
+        </c:forEach>
+    </ul>
+
+    <c:if test="${empty phones}">
+        <h3>Nie masz jeszcze ulubionych smartphonów</h3>
+    </c:if>
 
     <%@include file="../footer.jsp"%>
 

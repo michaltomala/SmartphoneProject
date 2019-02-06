@@ -71,7 +71,6 @@ public class PhoneController {
         model.addAttribute("formAction", request.getContextPath()+"/admin/phone/add");
         return "phone/add";
     }
-
     /**
      * cruDELETE
      */

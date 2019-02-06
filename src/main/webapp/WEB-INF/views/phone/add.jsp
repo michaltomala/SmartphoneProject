@@ -34,7 +34,7 @@
         <form:input path="price" placeholder="cena"  cssClass="form-input"/>
         <form:errors path="price" cssClass="alert alert-danger" element="div"/>
 
-        <form:textarea path="description" cols="12" rows="3" placeholder="opis"  cssClass="form-input"/>
+        <form:textarea path="description" cols="20" rows="6" placeholder="opis"  cssClass="form-input"/>
         <form:errors path="description" cssClass="alert alert-danger" element="div"/>
 
         <form:select path="brand"  cssClass="form-input">

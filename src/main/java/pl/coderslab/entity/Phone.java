@@ -39,6 +39,13 @@ public class Phone {
     public Phone() {
     }
 
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
+    public void deleteUser(User user){
+        this.users.remove(user);
+    }
 
     @Override
     public String toString() {

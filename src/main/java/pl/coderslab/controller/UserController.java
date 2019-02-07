@@ -62,9 +62,10 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         user.deleteFavoriteSmartphone(phone);
         userRepository.save(user);
+        phone.deleteUser(user);
+        phoneRepository.save(phone);
         session.setAttribute("user",user);
-//      todo:usuwanie ulubionych smartphonów
-        return "redirect:/user/"+id+"";
+        return "redirect:/user/"+user.getId();
     }
 
 

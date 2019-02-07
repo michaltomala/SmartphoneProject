@@ -67,14 +67,15 @@ public class PhoneController {
     @GetMapping("/user/phone/add/{id}")
     public String addFavoriteSmartphone(@PathVariable Long id , HttpSession session){
         Phone phone = phoneRepository.findOne(id);
-        User userFromSession = (User) session.getAttribute("user");
-        User user = userRepository.findFirstByLogin(userFromSession.getLogin());
-        user.addFavoriteSmartphone(phone);
+        User user = (User) session.getAttribute("user");
+        user .addFavoriteSmartphone(phone);
         userRepository.save(user);
+        phone.addUser(user);
+        phoneRepository.save(phone);
         session.setAttribute("user",user);
-//       todo dodawanie ulubionych smartphonów
         return "redirect:/phone/list";
     }
+
     /**
      * cREADud
      */

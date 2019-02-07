@@ -12,11 +12,12 @@ public class HomeController {
         return "redirect:/home";
     }
 //  todo połączyć header i footer do wszystkich linków
-//   zrobić user controller i ustawienia usera
 
     @GetMapping("/home")
     public String home(){
         return "home";
     }
+
+//   w widoku strony głównej flagships
 
 }

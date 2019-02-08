@@ -1,4 +1,5 @@
-# SmartphoneProject - This is my project about smartphones for the Coders Lab bootcamp.I'm still working here.
+# SmartphoneProject -
+This is my project about smartphones for the Coders Lab bootcamp.I'm still working here.
 
 This is for people who are intrested in technology,especially smartphones.
 

@@ -35,7 +35,7 @@ public class User {
 
     private boolean isAdmin = false;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
     private List<Phone> phones;
 
     public User() {

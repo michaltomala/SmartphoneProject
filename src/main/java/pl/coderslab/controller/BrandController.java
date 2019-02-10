@@ -113,7 +113,7 @@ public class BrandController {
         Phone phone = new Phone();
         phone.setBrand(brand);
         model.addAttribute("phone", phone);
-        model.addAttribute("formAction", request.getContextPath() + "/phone/add");
+        model.addAttribute("formAction", request.getContextPath() + "/admin/phone/add");
         return "phone/add";
     }
 

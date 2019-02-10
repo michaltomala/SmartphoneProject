@@ -24,6 +24,8 @@ import javax.validation.Validator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Controller
@@ -113,45 +115,96 @@ public class UserController {
     @PostMapping("/settings/{action}/{id}")
     public String saveUser(Model model,@ModelAttribute User user, HttpServletRequest request,@PathVariable Long id,@PathVariable String action , HttpSession session) {
 
-//        todo sprawdzenie powtórzenia hasła +
-//        todo dokonczyc walidacja !
-
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         if(!violations.isEmpty()){
-            for (ConstraintViolation<User> err:violations){
-                Path property = err.getPropertyPath();
+                for (ConstraintViolation<User> err:violations){
+                    Path property = err.getPropertyPath();
+                    switch(action){
+                        case "login":{
+                            if(property.toString().equals("login") ){
+                                if(user.getLogin().equals("")){
+                                    model.addAttribute("pwdErr", "Musisz podać nazwę !");
+                                    model.addAttribute("login", "login");
+                                    model.addAttribute("user",session.getAttribute("user"));
+                                    return "user/settings";
+                                }
+                            }
+                            break;
+                        }
+                        case "password": {
+                            if (property.toString().equals("password")) {
+                                if (user.getPassword().length() < 6) {
+                                    model.addAttribute("pwdErr", "Hasło musi mieć minimum 6 znaków");
+                                    model.addAttribute("password", "password");
+                                    model.addAttribute("user", session.getAttribute("user"));
+                                    return "user/settings";
+                                }
+                            }
+                            break;
+                        }
+                        case "email": {
+                            if(user.getEmail().equals("")){
+                                model.addAttribute("pwdErr", "Musisz podać nazwę !");
+                                model.addAttribute("email", "email");
+                                model.addAttribute("user",session.getAttribute("user"));
+                                return "user/settings";
+                            }
+                            break;
+                        }
+                    }
+                }
+        }
 
-                if(property.toString().equals("login") ){
-                    if(user.getLogin().equals("")){
-                        model.addAttribute("pwdErr", "Musisz podać nazwę !");
-                        model.addAttribute("login", "login");
+//      Dodatkowe walidacje
+
+        switch(action){
+            case "login":{
+//      Sprawdzenie czy login usera już istnieje
+                if(userRepository.findFirstByLogin(user.getLogin()) != null) {
+                    model.addAttribute("pwdErr", "Taki użytkownik już istnieje !");
+                    model.addAttribute("login", "login");
+                    model.addAttribute("user",session.getAttribute("user"));
+                    return "user/settings";
+                }
+                break;
+            }
+            case "password":{
+//      Sprawdzenie czy powtórzone hasło jest takie samo
+                if (!user.getPassword().equals(user.getRepeatedPassword())) {
+                    model.addAttribute("pwdErr", "Hasła muszą być takie same!");
+                    model.addAttribute("password", "password");
+                    model.addAttribute("user", session.getAttribute("user"));
+                    return "user/settings";
+                }
+                break;
+            }
+            case "email": {
+//       Sprawdzenie czy mail usera już istnieje
+                if(userRepository.findFirstByEmail(user.getEmail()) != null){
+                    model.addAttribute("pwdErr", "Taki email już istnieje !");
+                    model.addAttribute("email", "email");
+                    model.addAttribute("user",session.getAttribute("user"));
+                    return "user/settings";
+                } else{
+//      Sprawdzenie czy email jest email
+                    Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                    Matcher matcher = pattern.matcher(user.getEmail());
+
+                    if(!matcher.find()){
+                        model.addAttribute("pwdErr", "Niepoprawny format!");
+                        model.addAttribute("email", "email");
                         model.addAttribute("user",session.getAttribute("user"));
                         return "user/settings";
                     }
-                    if(userRepository.findFirstByLogin(user.getLogin()) != null)
-                    model.addAttribute("pwdErr", "Taki użytkownik już istnieje !");
-                    return "user/settings";
-
-
-
-                }else if(err.getPropertyPath().equals("password")){
-
-
-
-
-                }else if(err.getPropertyPath().equals("email")){
-                    if(user.getEmail() == null){
-                        model.addAttribute("pwdErr", "Musisz podać nazwę !");
-                        return "user/settings";
-                    }
-                    model.addAttribute("pwdErr", "Musisz podać nazwę !");
-                    return "user/settings";
                 }
-
+                break;
             }
         }
 
 
+
+
+// Zapisanie usera
         User userToSave = userRepository.findOne(id);
         switch(action){
             case "login":{
@@ -176,7 +229,5 @@ public class UserController {
 
         return "redirect:"+request.getContextPath()+"/settings/"+id;
     }
-
-
 
 }

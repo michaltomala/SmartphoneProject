@@ -34,12 +34,9 @@ public class IsAdminFilter implements Filter {
         }
 
         if( !user.getIsAdmin() ){
-        // nie daje zezwolenie
             response.sendRedirect(request.getContextPath()+"/");
             return;
         }
-
-        //daje zezwolenia
 
         chain.doFilter(req, resp);
     }

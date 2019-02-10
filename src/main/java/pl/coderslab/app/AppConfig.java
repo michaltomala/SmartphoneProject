@@ -67,7 +67,7 @@ public class AppConfig implements WebMvcConfigurer {
 //  przy dodawaniu marki/usera/telefonu obok formularza wstawić nazwę co ma wstawić użytkownik (np. price i obok
 // input ,name i obok input z namem)
 //  w dashboard administratora dać opcję edycji
-//  dodawanie i usuwanie ulubionych telefonów użytkownika
+//  usuwanie ulubionych telefonów użytkownika
 //  rozdzielić na serwisy
 //  rest api
 
@@ -80,4 +80,5 @@ public class AppConfig implements WebMvcConfigurer {
 //    todo fajne ostylowanie (wywalenie bootstrapa i swoje style)
 
 //      todo zrobić profil na githubie
+//      todo dumb sql
 }

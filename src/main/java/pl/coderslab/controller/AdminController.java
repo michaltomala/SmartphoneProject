@@ -41,58 +41,49 @@ public class AdminController {
 
     @GetMapping("/admin/dashboard/user")
     public String user(Model model){
+        model.addAttribute("user",new User());
         return "admin/user";
-//        todo edycja i usuniecie usera
     }
 
 
     @GetMapping("/admin/dashboard/user/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
-        User user = userRepository.findOne(id);
-        model.addAttribute("editingUser",user);
-        model.addAttribute("admin",userRepository.findOne((long) 1));
+        User editingUser = userRepository.findOne(id);
+        model.addAttribute("user",editingUser);
         model.addAttribute("formAction", request.getContextPath() + "/admin/dashboard/user/"+id);
         return "admin/user";
     }
 
     @PostMapping("/admin/dashboard/user/{id}")
-    public String update(@Validated({AdminValidationUserGroup.class}) User user , BindingResult errors, HttpServletRequest req, Model model, HttpSession session){
+    public String update(@Validated({AdminValidationUserGroup.class}) User user, BindingResult errors, HttpServletRequest req, Model model, HttpSession session){
         if (errors.hasErrors()) {
-
-//            List<ObjectError> allErrors = errors.getAllErrors();
-//            for(ObjectError err : allErrors){
-//                System.out.println(err.toString());
-//            }
-//            todo: wyświetlić błędy walidacji w widoku
-            model.addAttribute("errors",errors);
-            model.addAttribute("user",session.getAttribute("user"));
-            model.addAttribute("editingUser",user);
+//            todo: problem leży w nazwie - po zaakceptowaniu formularza do binding result zostaje dodany
+//            todo: user zamiast editingUser - potem w formularzu
             return "admin/user";
-//          todo zrobić w widoku user numeracje po kolei
-//            todo zrobic porzadek z nazwami błedów w widokach (żeby nie było wszędzie pwdErro)
+
         }
 
         User checkUser = userRepository.findFirstByLogin(user.getLogin());
         if (checkUser != null && !checkUser.getId().equals(user.getId())) {
             model.addAttribute("loginErr", "Taki użytkownik już istnieje !");
-            model.addAttribute("user",session.getAttribute("user"));
+            model.addAttribute("user",session.getAttribute("userFromSession"));
             model.addAttribute("editingUser",user);
             return "admin/user";
         }
         checkUser = userRepository.findFirstByEmail(user.getEmail());
         if (checkUser != null && !checkUser.getId().equals(user.getId())) {
             model.addAttribute("emailErr", "Email musi być unikalny !");
-            model.addAttribute("user",session.getAttribute("user"));
+            model.addAttribute("user",session.getAttribute("userFromSession"));
             model.addAttribute("editingUser",user);
             return "admin/user";
         }
 
         userRepository.save(user);
-        //todo wynieść to do serwisu
 
         return "redirect:"+req.getContextPath()+"/admin/dashboard/user";
     }
-
+//          todo zrobić w widoku user numeracje po kolei
+//            todo zrobic porzadek z nazwami błedów w widokach (żeby nie było wszędzie pwdErro)
 
     @GetMapping("/admin/dashboard/confirm/{id}")
     public String confirm(Model model,HttpServletRequest request,@PathVariable Long id){
@@ -109,13 +100,12 @@ public class AdminController {
         return "redirect:"+request.getContextPath()+"/admin/dashboard/user";
     }
 
-// todo dokończyć edycje - w encji User należy dodać osobny walidator i robić osobną walidację +
-//   problem z niezapisywaniem pola admina
 
 
     @ModelAttribute("users")
     public List<User> userList(){ return userRepository.findAll(); }
 
+//   todo zmienić tu z sztywnego admina na zalogowanego ( pobranego z sesji)
     @ModelAttribute("admin")
     public User admin(){return userRepository.findOne((long) 1); }
 

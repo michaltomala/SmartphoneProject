@@ -100,6 +100,9 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+    public void setIsAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public String getRepeatedPassword() {
         return repeatedPassword;
@@ -115,5 +118,11 @@ public class User {
 
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        return user.getId()==this.getId();
     }
 }

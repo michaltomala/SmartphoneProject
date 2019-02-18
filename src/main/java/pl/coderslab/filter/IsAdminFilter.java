@@ -26,7 +26,7 @@ public class IsAdminFilter implements Filter {
 
         HttpSession session = request.getSession();
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("userFromSession");
 
         if(user == null){
             response.sendRedirect(request.getContextPath()+"/login");

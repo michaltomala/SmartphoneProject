@@ -67,12 +67,12 @@ public class PhoneController {
     @GetMapping("/user/phone/add/{id}")
     public String addFavoriteSmartphone(@PathVariable Long id , HttpSession session){
         Phone phone = phoneRepository.findOne(id);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("userFromSession");
         user .addFavoriteSmartphone(phone);
         userRepository.save(user);
         phone.addUser(user);
         phoneRepository.save(phone);
-        session.setAttribute("user",user);
+        session.setAttribute("userFromSession",user);
         return "redirect:/phone/list";
     }
 

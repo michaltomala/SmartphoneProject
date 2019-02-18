@@ -86,7 +86,6 @@ public class BrandController {
     /**
      * findALL and list them
      */
-//    todo zrobić w widoku żeby pokazywało połączone smartphony
     @GetMapping("/brand/list")
     public String showAll(Model model){
         model.addAttribute("brands",brandRepository.findAll());
@@ -97,7 +96,6 @@ public class BrandController {
      *  findALL phones by Brand
      */
 
-//    todo porobić linki cofające
 
     @GetMapping("/brand/list/{id}")
     public String showAllSmartphonesById(Model model , @PathVariable Long id){

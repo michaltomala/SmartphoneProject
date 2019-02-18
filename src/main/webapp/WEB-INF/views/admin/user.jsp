@@ -23,30 +23,28 @@
 
 
     <ul>
-        <c:forEach items="${users}" var="user">
-        <li>${user.id}  ${user.login} ${user.email}
-            <a href="${pageContext.request.contextPath}/admin/dashboard/user/${user.id}">edytuj</a>
+        <c:forEach items="${users}" var="u">
+        <li>${u.id}  ${u.login} ${u.email}
+            <a href="${pageContext.request.contextPath}/admin/dashboard/user/${u.id}">edytuj</a>
 
-            <c:if test="${user.id  !=  admin.id}">
-                <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${user.id}">usuń</a>
+            <c:if test="${u.id  !=  admin.id}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${u.id}">usuń</a>
             </c:if>
 
-            <c:if test="${editingUser.id == user.id}">
+            <c:if test="${user.id == u.id}">
                 <form:form method="post"
                            action="${formAction}"
-                           modelAttribute="editingUser">
+                           modelAttribute="user">
                     <form:hidden path="id" />
                     <form:hidden path="password" />
 
-                    <form:input path="login" value="${editingUser.login}" />
-                    <form:errors path="login"/>
+                    <form:input path="login" value="${user.login}" />
 
 
-                    <form:input path="email" value="${editingUser.email}" />
-                    <form:errors path="email" />
+                    <form:input path="email" value="${user.email}" />
 
-                    <c:if test="${editingUser.id != 1}">
-                        <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
+                    <c:if test="${user.id != 1}">
+                        <form:checkbox path="isAdmin" value="${user.isAdmin}" />
                     </c:if>
 
                     <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
@@ -58,13 +56,13 @@
                         <div class="alert alert-danger">${emailErr}</div>
                     </c:if>
 
-
+                    <div><form:errors path="login"  /></div>
+                    <div><form:errors path="email" /></div>
                 </form:form>
-
             </c:if>
-            <c:if test="${not empty confirm and deletingUser.id == user.id}">
+            <c:if test="${not empty confirm and deletingUser.id == u.id}">
                 Potwierdź usunięcie tego użytkownika!
-                <a href="${pageContext.request.contextPath}/admin/dashboard/delete/${user.id}">Tak</a>
+                <a href="${pageContext.request.contextPath}/admin/dashboard/delete/${u.id}">Tak</a>
                 <a href="${pageContext.request.contextPath}/admin/dashboard/user">Nie</a>
             </c:if>
 

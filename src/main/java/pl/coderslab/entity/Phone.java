@@ -44,7 +44,16 @@ public class Phone {
     }
 
     public void deleteUser(User user){
-        this.users.remove(user);
+//        User userToDelete = null;
+//        for(User u : this.users){
+//            if(u.getId()==user.getId()){
+//                userToDelete = u;
+//            }
+//        }
+//        if(userToDelete != null){
+//            this.users.remove(userToDelete);
+//        }
+            this.users.remove(user);
     }
 
     @Override
@@ -99,4 +108,7 @@ public class Phone {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+
+
 }

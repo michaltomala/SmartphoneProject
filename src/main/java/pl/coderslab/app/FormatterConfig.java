@@ -26,7 +26,7 @@ public class FormatterConfig implements WebMvcConfigurer{
 
         registry.addConverter(getUserConverter());
         registry.addConverter(getPhoneConverter());
-        registry.addConverter(getBrandConverter ());
+        registry.addConverter(getBrandConverter());
 
     }
 

@@ -63,17 +63,17 @@
             </div>
             <%-- Tak wiem że tak się nie robi (style inline) !!--%>
             <div class="col" style="float:right; ">
-                <c:if test="${not empty user and user.isAdmin == true}">
+                <c:if test="${not empty userFromSession and userFromSession.isAdmin == true}">
                     <a class="nav-link color-header" href="/admin/dashboard">Panel administracyjny</a>
                 </c:if>
-                <c:if test="${empty user}">
+                <c:if test="${empty userFromSession}">
                     <a class="nav-link color-header" href="/login">Zaloguj się</a>
                     <a class="nav-link color-header" href="/register">Rejestracja</a>
                 </c:if>
-                <c:if test="${not empty user}">
+                <c:if test="${not empty userFromSession}">
                     Witaj
-                    <a class="nav-link color-header" href="/user/${user.id}"> ${user.login}</a>
-                    <a class="nav-link color-header" href="/settings/${user.id}">Ustawienia</a>
+                    <a class="nav-link color-header" href="/user/${userFromSession.id}"> ${userFromSession.login}</a>
+                    <a class="nav-link color-header" href="/settings/${userFromSession.id}">Ustawienia</a>
                     <a class="nav-link color-header" href="/logout">Wyloguj się</a>
                 </c:if>
             </div>

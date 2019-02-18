@@ -23,7 +23,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request, HttpSession session) {
-        if (session.getAttribute("user") != null) {
+        if (session.getAttribute("userFromSession") != null) {
             return "redirect:/";
         }
         model.addAttribute("user", new User());
@@ -41,16 +41,16 @@ public class LoginController {
             model.addAttribute("errDB", "Nie ma takiego użytkownika");
             return "user/login";
         }
+//       todo: warunek poniżej do sprawdzenia
         if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()))) {
             model.addAttribute("errDB", "Hasło się nie zgadza,spróbuj jeszcze raz");
             return "user/login";
         }
 
-        session.setAttribute("user", userToCheck);
+        session.setAttribute("userFromSession", userToCheck);
         return "redirect:/home";
     }
 
-//  todo przerobić błedy na polskie znaki
 
     @GetMapping("/register")
     public String register(Model model, HttpServletRequest request) {
@@ -80,7 +80,7 @@ public class LoginController {
                 return "user/register";
             }
             userRepository.save(user);
-            session.setAttribute("user",user);
+            session.setAttribute("userFromSession",user);
             return "redirect:/home";
         } else {
             model.addAttribute("pwdErr", "Hasła muszą być takie same!");
@@ -100,7 +100,7 @@ public class LoginController {
      */
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
-        session.setAttribute("user", null);
+        session.setAttribute("userFromSession", null);
         return "redirect:/home";
     }
 }

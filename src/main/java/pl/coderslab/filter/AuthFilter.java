@@ -23,7 +23,7 @@ public class AuthFilter implements Filter {
         String url = request.getRequestURI();
 
         if( (url.equals("/abc") )) {
-            if(session.getAttribute("user") == null){
+            if(session.getAttribute("userFromSession") == null){
                 response.sendRedirect(request.getContextPath()+"/login");
                 return;
             }

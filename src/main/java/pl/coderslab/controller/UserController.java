@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public String showUser(HttpSession session , @PathVariable Long id, Model model){
         User user = userRepository.findOne(id);
-        User userToCheck = (User) session.getAttribute("user");
+        User userToCheck = (User) session.getAttribute("userFromSession");
         if(!user.getId().equals(userToCheck.getId())){
             return "redirect:/login";
         }
@@ -61,12 +61,10 @@ public class UserController {
     @GetMapping("/user/phone/delete/{id}")
     public String deleteFavoriteSmartphone(@PathVariable Long id , HttpSession session){
         Phone phone = phoneRepository.findOne(id);
-        User user = (User) session.getAttribute("user");
-        user.deleteFavoriteSmartphone(phone);
-        userRepository.save(user);
+        User user = (User) session.getAttribute("userFromSession");
         phone.deleteUser(user);
         phoneRepository.save(phone);
-        session.setAttribute("user",user);
+        session.setAttribute("userFromSession",user);
         return "redirect:/user/"+user.getId();
     }
 
@@ -75,7 +73,7 @@ public class UserController {
     public String settings(HttpSession session , @PathVariable Long id , Model model){
 
         User user = userRepository.findOne(id);
-        User userToCheck = (User) session.getAttribute("user");
+        User userToCheck = (User) session.getAttribute("userFromSession");
         if(user != null && userToCheck != null && user.getLogin().equals(userToCheck.getLogin())){
             model.addAttribute("user",user);
             return "user/settings";
@@ -88,7 +86,7 @@ public class UserController {
 
 
         User user = userRepository.findOne(id);
-        User userToCheck = (User) session.getAttribute("user");
+        User userToCheck = (User) session.getAttribute("userFromSession");
         if(user != null && userToCheck != null && user.getLogin().equals(userToCheck.getLogin())){
 
         model.addAttribute("user", user);
@@ -125,7 +123,7 @@ public class UserController {
                                 if(user.getLogin().equals("")){
                                     model.addAttribute("pwdErr", "Musisz podać nazwę !");
                                     model.addAttribute("login", "login");
-                                    model.addAttribute("user",session.getAttribute("user"));
+                                    model.addAttribute("user",session.getAttribute("userFromSession"));
                                     return "user/settings";
                                 }
                             }
@@ -133,10 +131,10 @@ public class UserController {
                         }
                         case "password": {
                             if (property.toString().equals("password")) {
-                                if (user.getPassword().length() < 6) {
+                                if (user.getPassword().length() < 8) {
                                     model.addAttribute("pwdErr", "Hasło musi mieć minimum 6 znaków");
                                     model.addAttribute("password", "password");
-                                    model.addAttribute("user", session.getAttribute("user"));
+                                    model.addAttribute("user", session.getAttribute("userFromSession"));
                                     return "user/settings";
                                 }
                             }
@@ -146,7 +144,7 @@ public class UserController {
                             if(user.getEmail().equals("")){
                                 model.addAttribute("pwdErr", "Musisz podać nazwę !");
                                 model.addAttribute("email", "email");
-                                model.addAttribute("user",session.getAttribute("user"));
+                                model.addAttribute("user",session.getAttribute("userFromSession"));
                                 return "user/settings";
                             }
                             break;
@@ -163,7 +161,7 @@ public class UserController {
                 if(userRepository.findFirstByLogin(user.getLogin()) != null) {
                     model.addAttribute("pwdErr", "Taki użytkownik już istnieje !");
                     model.addAttribute("login", "login");
-                    model.addAttribute("user",session.getAttribute("user"));
+                    model.addAttribute("user",session.getAttribute("userFromSession"));
                     return "user/settings";
                 }
                 break;
@@ -173,7 +171,7 @@ public class UserController {
                 if (!user.getPassword().equals(user.getRepeatedPassword())) {
                     model.addAttribute("pwdErr", "Hasła muszą być takie same!");
                     model.addAttribute("password", "password");
-                    model.addAttribute("user", session.getAttribute("user"));
+                    model.addAttribute("user", session.getAttribute("userFromSession"));
                     return "user/settings";
                 }
                 break;
@@ -183,7 +181,7 @@ public class UserController {
                 if(userRepository.findFirstByEmail(user.getEmail()) != null){
                     model.addAttribute("pwdErr", "Taki email już istnieje !");
                     model.addAttribute("email", "email");
-                    model.addAttribute("user",session.getAttribute("user"));
+                    model.addAttribute("user",session.getAttribute("userFromSession"));
                     return "user/settings";
                 } else{
 //      Sprawdzenie czy email jest email
@@ -193,7 +191,7 @@ public class UserController {
                     if(!matcher.find()){
                         model.addAttribute("pwdErr", "Niepoprawny format!");
                         model.addAttribute("email", "email");
-                        model.addAttribute("user",session.getAttribute("user"));
+                        model.addAttribute("user",session.getAttribute("userFromSession"));
                         return "user/settings";
                     }
                 }
@@ -210,19 +208,19 @@ public class UserController {
             case "login":{
                 userToSave.setLogin(user.getLogin());
                 userRepository.save(userToSave);
-                session.setAttribute("user", userToSave);
+                session.setAttribute("userFromSession", userToSave);
                 break;
             }
             case "password":{
                 userToSave.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
                 userRepository.save(userToSave);
-                session.setAttribute("user", userToSave);
+                session.setAttribute("userFromSession", userToSave);
                 break;
             }
             case "email": {
                 userToSave.setEmail(user.getEmail());
                 userRepository.save(userToSave);
-                session.setAttribute("user", userToSave);
+                session.setAttribute("userFromSession", userToSave);
                 break;
             }
         }
